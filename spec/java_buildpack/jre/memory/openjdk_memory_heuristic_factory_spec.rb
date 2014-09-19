@@ -23,7 +23,7 @@ require 'rspec/expectations'
 RSpec::Matchers.define :be_a_hash_like do |expected|
   match do |actual|
     expected['heap']['1m'] == actual['heap']['1m'] &&
-      expected['metaspace']['2m'] == actual['metaspace']['2m'] &&
+ #     expected['metaspace']['2m'] == actual['metaspace']['2m'] &&
       expected['permgen']['3m'] == actual['permgen']['3m'] &&
       expected['stack']['4m'] == actual['stack']['4m']
   end
@@ -42,7 +42,7 @@ describe JavaBuildpack::Jre::OpenJDKMemoryHeuristicFactory do
   let(:expected_java_memory_options) do
     {
       'heap'      => ->(v) { %W(-Xmx#{v} -Xms#{v}) },
-      'metaspace' => ->(v) { %W(-XX:MaxMetaspaceSize=#{v} -XX:MetaspaceSize=#{v}) },
+ #     'metaspace' => ->(v) { %W(-XX:MaxMetaspaceSize=#{v} -XX:MetaspaceSize=#{v}) },
       'permgen'   => ->(v) { %W(-XX:MaxPermSize=#{v} -XX:PermSize=#{v}) },
       'stack'     => ->(v) { %W(-Xss#{v}) }
     }
